@@ -1,0 +1,27 @@
+#14. Set up Cloud Storage Data Access Audit Logs to track who is accessing your data and when:
+
+gcloud logging sinks create [SINK_NAME] storage.googleapis.com/[BUCKET_NAME] --log-filter='resource.type="gcs_bucket" AND protoPayload.methodName="storage.objects.*"'
+
+Replace [SINK_NAME] with a unique name for your logging sink, and [BUCKET_NAME] with the name of your bucket.
+This command sets up a logging sink that exports Cloud Storage Data Access Audit Logs to your Cloud Storage bucket. The output will display a success message indicating that the logging sink has been created.
+
+#15. Use Cloud Storage Object Versioning and Retention to archive data that is no longer needed:
+
+gsutil retention set [ARCHIVAL_PERIOD] --event-based --storage-class=ARCHIVE gs://[BUCKET_NAME]
+
+Replace [ARCHIVAL_PERIOD] with the number of seconds for which you want to archive objects (e.g., 365d for 365 days), and [BUCKET_NAME] with the name of your bucket.
+This command archives objects in your bucket that are no longer needed but must be retained for compliance or legal reasons. The objects will be stored in the Cloud Storage ARCHIVE storage class, which has a lower storage cost but a longer retrieval time. The output will display a success message indicating that archival has been enabled for the objects in the bucket.
+
+#16. Set up Cloud Storage Transfer Service to transfer data from your Cloud Storage bucket to other cloud providers or on-premises data centers:
+
+gcloud beta transfer operations create --config [TRANSFER_CONFIG] --description [DESCRIPTION] --project [PROJECT_ID]
+
+Replace [TRANSFER_CONFIG] with the path to a JSON file that specifies the transfer configuration, [DESCRIPTION] with a description of the transfer operation, and [PROJECT_ID] with the ID of your GCP project.
+This command creates a transfer operation using the specified transfer configuration, which can be used to transfer data from your Cloud Storage bucket to other cloud providers or on-premises data centers. The output will display a success message indicating that the transfer operation has been created.
+
+#17. Regularly review and update your Cloud Storage infrastructure to ensure that it is meeting your company's evolving needs and compliance requirements. When it comes time to retire your application, make sure to properly delete all associated resources to avoid unnecessary charges:
+
+gcloud projects delete [PROJECT_ID]
+
+Replace [PROJECT_ID] with the ID of your GCP project.
+This command deletes your GCP project, including all associated resources. The output will display a success message indicating that the project has been deleted.
