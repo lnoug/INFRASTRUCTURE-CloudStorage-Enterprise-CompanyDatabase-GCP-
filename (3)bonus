@@ -1,0 +1,26 @@
+#10. Set up Cloud Storage Transfer Service to transfer data from other cloud providers or on-premises data centers to your Cloud Storage bucket:
+
+gcloud beta transfer operations create --config [TRANSFER_CONFIG] --description [DESCRIPTION] --project [PROJECT_ID]
+
+Replace [TRANSFER_CONFIG] with the path to a JSON file that specifies the transfer configuration, [DESCRIPTION] with a description of the transfer operation, and [PROJECT_ID] with the ID of your GCP project.
+This command creates a transfer operation using the specified transfer configuration, which can be used to transfer data from other cloud providers or on-premises data centers to your Cloud Storage bucket. The output will display a success message indicating that the transfer operation has been created.
+
+#11. Enable Cloud Storage access transparency logs to track all changes made to your data:
+
+gcloud alpha storage activity describe --bucket [BUCKET_NAME] --object [OBJECT_NAME]
+
+Replace [BUCKET_NAME] with the name of your bucket, and [OBJECT_NAME] with the name of an object in your bucket.
+This command enables access transparency logs for your bucket, which tracks all changes made to your data. The output will display a success message indicating that access transparency logging has been enabled for the bucket.
+
+#12. Set up Cloud Storage Object Versioning and Retention to prevent data loss or deletion:
+
+gsutil retention set [RETENTION_PERIOD] gs://[BUCKET_NAME]
+
+Replace [RETENTION_PERIOD] with the number of seconds for which you want to retain objects in your bucket (e.g., 30d for 30 days), and [BUCKET_NAME] with the name of your bucket.
+This command sets up Object Versioning and Retention for your bucket, which prevents data loss or deletion by retaining multiple versions of objects and preventing the deletion of objects until the retention period has passed. The output will display a success message indicating that Object Versioning and Retention has been enabled for the bucket.
+
+#13. Use Cloud Storage Object Versioning and Retention to create legal hold on objects to comply with legal or regulatory requirements:
+
+gsutil retention set [LEGAL_HOLD_PERIOD] --event-based gs://[BUCKET_NAME]
+Replace [LEGAL_HOLD_PERIOD] with the number of seconds for which you want to place objects on legal hold (e.g., 365d for 365 days), and [BUCKET_NAME] with the name of your bucket.
+This command places objects in your bucket on legal hold, which prevents their deletion or modification until the legal hold period has passed. The output will display a success message indicating that legal hold has been placed on the objects in the bucket.
