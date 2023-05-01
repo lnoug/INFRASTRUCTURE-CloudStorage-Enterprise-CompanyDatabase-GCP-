@@ -1,0 +1,41 @@
+#5. Configure lifecycle management to automatically delete or archive data that is no longer needed:
+
+gsutil lifecycle set [LIFECYCLE_CONFIG] gs://[BUCKET_NAME]
+Replace [LIFECYCLE_CONFIG] with a JSON file that specifies the lifecycle management rules you want to apply to your bucket. For example, you could use the following configuration to delete objects in your bucket that are older than 30 days:
+
+{
+  "rule":
+  [
+    {
+      "action": {"type": "Delete"},
+      "condition": {"age": 30}
+    }
+  ]
+}
+
+This command sets the lifecycle management rules for your bucket. The output will display a success message indicating that the lifecycle configuration has been updated.
+
+#6. Set up versioning to keep multiple versions of your data:
+
+gsutil versioning set on gs://[BUCKET_NAME]
+
+This command enables versioning for your bucket, which allows you to keep multiple versions of your data. The output will display a success message indicating that versioning has been enabled for the bucket.
+
+#7. Use Object Change Notification to trigger notifications when objects are created, updated, or deleted:
+
+gsutil notification create -t [TOPIC_NAME] -f json gs://[BUCKET_NAME]
+
+Replace [TOPIC_NAME] with the name of the Cloud Pub/Sub topic you want to use to receive notifications, and [BUCKET_NAME] with the name of your bucket.
+This command sets up Object Change Notification for your bucket, which sends notifications to the specified Cloud Pub/Sub topic when objects are created, updated, or deleted. The output will display a success message indicating that the notification channel has been created.
+
+#8. Configure Cloud Storage access logs to log all access to your data:
+
+gsutil logging set on -b gs://[BUCKET_NAME] gs://[BUCKET_NAME]
+
+This command enables access logs for your bucket, which logs all access to your data. The output will display a success message indicating that access logging has been enabled for the bucket.
+#9. Monitor and manage your Cloud Storage usage and performance:
+
+gsutil du -s gs://[BUCKET_NAME]
+
+This command will display the total size of your bucket in bytes.
+This command allows you to monitor the size of your bucket and manage its usage and performance. The output will display the total size of the bucket in bytes.
